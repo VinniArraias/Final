@@ -1,10 +1,12 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 return_menu(){
 if [[ $1 == 0 ]]
          then
-                 dir="/home/vinicius/Projeto/Invent-rio/"
+                 #dir="/home/vinicius/Projeto/Invent-rio/"
                  cd $dir
                  source menu.sh $1
          fi
@@ -12,8 +14,8 @@ if [[ $1 == 0 ]]
 
 
 verificacao_cat(){
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
 
 if [[ -r $1 ]]
         then
@@ -31,8 +33,8 @@ if [[ -r $1 ]]
 
 verificacao_id(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
+cd $dir/registros/$1/
  
 arquivo="$1.csv"
 
@@ -97,7 +99,7 @@ CATEGORIA=$1
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source op4.sh $1
 fi
@@ -115,7 +117,7 @@ PATRIMONIO=$(dialog	--stdout										\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source op4.sh $1
 fi

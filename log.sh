@@ -1,7 +1,9 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
+
 log(){
-dir="/home/vinicius/Projeto/Invent-rio/"
 cd $dir
 
 date=$(date)

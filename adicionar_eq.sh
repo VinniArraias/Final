@@ -1,11 +1,13 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 return_menu(){
 
 if [[ $1 == 0 ]]
 	then
-		dir="/home/vinicius/Projeto/Invent-rio/"
+		#dir="/home/vinicius/Projeto/Invent-rio/"
 		cd $dir
 		source menu.sh $LOCALIDADE
 	fi
@@ -13,8 +15,8 @@ if [[ $1 == 0 ]]
 
 verificacao_categoria(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
 
 if [[ -r $1 ]]
          then
@@ -36,15 +38,15 @@ fi
 
 add_equip1(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $di/registros/
 
 
 LOCALIDADE=$1
 
 	if [[ $? == "1" ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 
 			source op2.sh $1
 fi
@@ -58,8 +60,8 @@ verificacao_categoria $LOCALIDADE
 
 add_equip2(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$LOCALIDADE/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$LOCALIDADE/"
+cd $dir/registros/$LOCALIDADE/
 
 
 exec 3>&1
@@ -100,7 +102,8 @@ CATEGORIA=$(echo $CATEGORIAA | tr 'A-Z' 'a-z')
 
 	if [[ $VALUES == "" ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/
+			#cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 			source op2.sh $1
 fi
 
@@ -116,7 +119,7 @@ fi
 
 if [[ $NUMB == "0" ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 
 			dialog						\
 				--title 'Erro'				\
@@ -131,8 +134,8 @@ fi
 for i in $(seq $NUMB)
 	do
 
-	arquivo="/home/vinicius/Projeto/Invent-rio/registros/$LOCALIDADE/$LOCALIDADE.csv"
-	arquivog="/home/vinicius/Projeto/Invent-rio/registros/"
+	arquivo="$dir/registros/$LOCALIDADE/$LOCALIDADE.csv"
+	arquivog="$dir/registros/"
 
 INFOx=";$CATEGORIA;$NOME_PRODUTO;$NUMERO_LAB;$DESCRICAO"
 cd $arquivog
@@ -181,7 +184,7 @@ if [[ $NUMB == 1 ]]
 			--msgbox "$NUMB itens cadastrados com sucesso!"				\
 			0 0
 fi
-dir="/home/vinicius/Projeto/Invent-rio/"
+#dir="/home/vinicius/Projeto/Invent-rio/"
 
 cd $dir
 

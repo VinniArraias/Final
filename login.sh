@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+dir="/usr/share/Invent-rio"
 
 incorrect(){
 
@@ -19,9 +20,9 @@ login
 
 correct(){
 
-cd registros/
+cd $dir/registros/
 
-loc=$(for x in $(cat listagem) ; do
+loc=$(for x in $(cat listagem.sh) ; do
          echo $x ' -'
         done)
 OPCAO=$(dialog --stdout --title "LOCALIDADE" --menu "Escolha uma localidade:" 0 0 0 $loc)
@@ -29,13 +30,14 @@ OPCAO=$(dialog --stdout --title "LOCALIDADE" --menu "Escolha uma localidade:" 0 
 if [[ $? == "1" ]]
                  then
                         #cd /home/vinicius/Projeto/Invent-rio/
-			cd ..
+			cd $dir
 
                         login
 fi
 
 #cd /home/vinicius/Projeto/Invent-rio/
-cd ..
+cd $dir
+
 source menu.sh $OPCAO
 
 
@@ -46,6 +48,7 @@ source menu.sh $OPCAO
 
 login(){
 #cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 N=8
 source log.sh $N
 
@@ -94,7 +97,7 @@ fi
 SHASENHA=$(echo $SENHA | sha256sum | cut -d" " -f1)
 
 #cd /home/vinicius/Projeto/Invent-rio/registros/
-cd registros/
+cd $dir/registros/
 
 
 for x in $(cat users)
@@ -106,11 +109,11 @@ for x in $(cat users)
 
 					if [[ $SHASENHA == $SHAUSER ]]
 						then
-							#cd /home/vinicius/Projeto/Invent-rio/registros/
+							cd $dir/registros/
 							echo $LOGIN > user_atual.sh
 
-							#cd /home/vinicius/Projeto/Invent-rio/
-							cd ..
+							cd $dir
+							
 
 							correct
 	
@@ -120,7 +123,6 @@ for x in $(cat users)
 
 					fi
 
-#incorrect
 fi
 
 done

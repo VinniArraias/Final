@@ -1,9 +1,11 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
 listar(){
 clear
 
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 
 dialog					\
@@ -11,14 +13,10 @@ dialog					\
 	--textbox listagem		\
 	0 0
 
-#echo "Para sair do arquivo a seguir, pressione a tecla q"
-#read -p "Agora, pressione [enter]" ENTER
 
-
-#less listagem
 clear
 
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 source op1.sh $1
 

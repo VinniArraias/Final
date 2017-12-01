@@ -1,13 +1,9 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
 opcao(){
 clear
-
-#echo "1) Cadastrar localidade"
-#echo "2) Cadastrar item"
-#echo "3) Voltar"
-#echo
-#read -p "Entre com uma opção: " OPCAO
 
 OPCAO=$(dialog --stdout				\
 	--title 'CADASTRAR'			\
@@ -20,7 +16,7 @@ OPCAO=$(dialog --stdout				\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source menu.sh $1
 fi
@@ -96,7 +92,7 @@ fi
 fi
 
 
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 grep $NOME users.csv 
 
@@ -132,7 +128,7 @@ echo $USER >> users
          0 0
  
  
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
  
 opcao $1
  

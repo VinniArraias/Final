@@ -1,47 +1,35 @@
 #!/bin/bash
 
-dir_initial=$(pwd)
+install_local(){
 
-
-cd /home/ #vai para o home
-mkdir vinicius #cria o diretório vinicius
-
-chmod 777 vinicius #todos os direitos para /vinicius/
-
-
-cd /home/vinicius/
-mkdir Projeto
-
-chmod 777 Projeto/
-
-
-cd /home/vinicius/Projeto/
-mkdir Invent-rio
-
-chmod 777 Invent-rio/
-
-
-cd /home/vinicius/Projeto/Invent-rio/
-mkdir registros
-
-chmod 777 registros/
 cd ..
+cp -R Invent-rio /usr/share
+ln -s /usr/share/Invent-rio/login.sh /usr/bin/Inventario &>/dev/null
+
+instalacao
+}
 
 
-dir_final=$(pwd)
+install_arquivo(){
+dir="/usr/share/Invent-rio"
+cd $dir
 
+touch users.csv
+touch user.csv
+touch usersr2.csv
+touch usersr.csv
+touch listag
+touch listagem
 
-cd $dir_initial
+chmod 777 *
 
-mv $dir_initial $dir_final
-cd $dir_final
+mkdir registros
+chmod 777 registros/
 
-echo "Instalação finalizada com sucesso!"
-echo "O diretório deste programa está em $dir_final"
-echo "Para executar este programa, você:"
-echo
-echo "1) Deve estar no diretório $dir_final;"
-echo "2) Deverá digitar ./ ou bash no arquivo login.sh;"
-echo "3) De preferência, sempre execute o programa como Super Usuário;"
-echo
-echo "Qualquer erro, contate-nos: empresasenai@example.com"
+cd $dir/registros/
+
+cd $dir
+}
+
+install_local
+install_arquivo

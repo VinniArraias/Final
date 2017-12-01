@@ -1,10 +1,11 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 validacao(){
  
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+cd $dir/registros/
 
  if [[ -r $1 ]]
         then
@@ -17,8 +18,8 @@ cd $dir
 
 verificacao_ida(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
+cd $dir/registros/$1/
 
 arquivo="$1.csv"
 
@@ -52,18 +53,12 @@ NOME=$(dialog	--stdout				\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                       #cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 
                         source editar.sh $1
 fi
 
-
-
-#	if [[ $NOME == "" ]]
-#		then
-#			read -p "Nome inválido! Pressione [enter] para voltar." ENTER
-#			verificacao_opcao $1
-#fi
 
 ID=$(grep "$2" $arquivo | cut -d";" -f1)
 
@@ -111,8 +106,6 @@ dialog				\
 
 clear
 
-#read -p "Novo nome mudado com sucesso! Pressione [enter] para retornar." ENTER
-
 
 verificacao_opcao $1
 
@@ -121,8 +114,8 @@ verificacao_opcao $1
 
 verificacao_idb(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
+cd $dir/registros/$1/
  
 arquivo="$1.csv"
 
@@ -135,7 +128,7 @@ grep "$2" $arquivo
                         #read -p "Pressione [enter] para continuar." ENTER
  
 			dialog							\
-				--title 'ID'					\
+				--title 'Erro'					\
 				--msgbox "ID ($ID) inválido."			\
 				0 0
 
@@ -153,7 +146,7 @@ DESCRICAO=$(dialog	--stdout						\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source editar.sh $1
 fi
@@ -200,8 +193,6 @@ dialog					\
 
 clear
 
-#read -p "Novo nome mudado com sucesso! Pressione [enter] para retornar." ENTER
-
 
 verificacao_opcao $1
 
@@ -211,8 +202,8 @@ verificacao_opcao $1
 
 verificacao_idc(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
+cd $dir/registros/$1/
  
 arquivo="$1.csv"
  
@@ -223,7 +214,7 @@ grep "$2" $arquivo
                         clear
 
                          dialog                                                  \
-                                 --title 'ID'                                    \
+                                 --title 'Erro'                                    \
                                  --msgbox "ID ($ID) inválido."                   \
                                 0 0
  
@@ -240,7 +231,7 @@ NL=$(dialog      --stdout                                                \
  
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $1
 
                          source editar.sh $1
 fi
@@ -289,23 +280,23 @@ verificacao_opcao $1
 verificacao_opcao(){
 clear
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/$1/"
+cd $dir/registros/$1/
 
 OPCAO=$(dialog	--stdout					\
 	--title 'ITEM'						\
 	--menu 'Escolha uma opção: '				\
 	0 0 0							\
-	"1" 'Editar nome do item'				\
+	"1" 'Editar descrição do item'				\
 	"2" 'Editar ambiente do item'				\
-	"3" 'Editar descrição do item'				\
-	"4" 'Fazer transferência de item para outra localidade'	\
+	"3" 'Editar apelido do item'				\
+	"4" 'Transferir item para outra localidade'		\
 	"5" 'Voltar'						)
 
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source menu.sh $1
 fi
@@ -322,10 +313,25 @@ fi
 
 				if [[ $? == "1" ]]
          			       then
-                        			cd /home/vinicius/Projeto/Invent-rio/
+                        			cd $dir
 
                         			source editar.sh $1
 				fi
+
+
+			if [[ $ID == "" ]]
+                                         then
+                                                 cd $dir
+ 
+                                                 dialog                          \
+                                                 --title 'Erro'                  \
+                                                --msgbox 'ID inválido.'         \
+                                                 0 0
+
+                                                source editar.sh $1
+                                 fi
+
+
 
 			verificacao_ida $1 $ID
 			
@@ -338,10 +344,25 @@ fi
 
 				if [[ $? == "1" ]]
 					then
-						cd /home/vinicius/Projeto/Invent-rio/
+						cd $dir
 						
 						source editar.sh $1
 				fi
+
+
+				if [[ $ID == "" ]]
+                                         then
+                                                cd $dir
+ 
+                                                dialog                          \
+                                                 --title 'Erro'                 \
+                                                --msgbox 'ID inválido.'         \
+                                                0 0
+ 
+                                                source editar.sh $1
+                                 fi
+
+
 
 			verificacao_idc $1 $ID
 
@@ -357,17 +378,31 @@ fi
 
 				if [[ $? == "1" ]]
                 			then
-                       				 cd /home/vinicius/Projeto/Invent-rio/
+                       				 cd $dir
 
                         			 source editar.sh $1
 				fi
+
+
+				if [[ $ID == "" ]]
+					then
+						cd $dir
+
+						dialog				\
+						--title 'Erro'			\
+						--msgbox 'ID inválido.'		\
+						0 0
+
+						source editar.sh $1
+				fi
+
 
 			verificacao_idb $1 $ID
 
 
 	elif [[ $OPCAO == 4 ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/registros/
+			cd $dir/registros/
 
 			ID=$(dialog --stdout									\
 				--title 'ID'									\
@@ -376,11 +411,11 @@ fi
 
 				if [[ $? == "1" ]]
 					then
-						cd /home/vinicius/Projeto/Invent-rio/
+						cd $dir
 						source editar.sh $1
 			fi		
 
-			cd /home/vinicius/Projeto/Invent-rio/registros/$1/
+			cd $dir/registros/$1/
 			arquivo="$1.csv"
 		
 			grep "$ID" $arquivo
@@ -389,35 +424,35 @@ fi
 					then
 						dialog					\
 							--title 'Erro'			\
-							--msgbox "ID ($ID) inválido"	\
+							--msgbox "ID ($ID) inválido."	\
 							0 0
-						cd /home/vinicius/Projeto/Invent-rio/
+						cd $dir
 						source editar.sh $1
 						#verificacao_opcao $1
 			fi
 
 			INFO=$(grep "$ID" $arquivo)
 		
-					cd /home/vinicius/Projeto/Invent-rio/registros/
+					cd $dir/registros/
  
 				 loc=$(for x in $(cat listagem) ; do
           			echo $x ' -' #$x ' -'
         			 done)
-				 LOCALIDADE=$(dialog --stdout --menu "Escolha uma localidade:" 0 0 0 $loc)
+				 LOCALIDADE=$(dialog --stdout --title "Transferência" --menu "Escolha uma localidade:" 0 0 0 $loc)
  
 					if [[ $? == "1" ]]
                   					then
-                         				cd /home/vinicius/Projeto/Invent-rio/
+                         				cd $dir
 
                         				source editar.sh $1
  						fi
-			cd /home/vinicius/Projeto/Invent-rio/registros/$1/
+			cd $dir/registros/$1/
 			grep -Riv "$ID" $arquivo > $1 
 
                         cat $1 > $arquivo
  
 
-				cd /home/vinicius/Projeto/Invent-rio/registros/$LOCALIDADE/
+				cd $dir/registros/$LOCALIDADE/
 
 				echo $INFO >> $LOCALIDADE.csv
 
@@ -431,7 +466,7 @@ fi
 					--textbox $LOCALIDADE.csv	\
 					0 0
 
-				cd /home/vinicius/Projeto/Invent-rio/
+				cd $dir
 
 				source editar.sh $1
 
@@ -439,7 +474,7 @@ fi
 
 	elif [[ $OPCAO == 5 ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 			source menu.sh $1
 
 	else
@@ -463,7 +498,7 @@ LOCALIDADE=$1
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source menu.sh $1
 fi
@@ -473,25 +508,25 @@ fi
 
 if [[ $LOCALIDADE == 0 ]]
         then
-                dir="/home/vinicius/Projeto/Invent-rio/"
+                #dir="/home/vinicius/Projeto/Invent-rio/"
                 cd $dir
                 source menu.sh $1
          fi
  
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
  
 validacao $LOCALIDADE
 
-cd /home/vinicius/Projeto/Invent-rio/registros/$LOCALIDADE/
+cd $dir/registros/$LOCALIDADE/
  
 arquivo="$LOCALIDADE.csv"
  
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 verificacao_opcao $LOCALIDADE
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
 clear
 }
 

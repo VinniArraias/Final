@@ -1,7 +1,8 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
 exibir(){
-dir="/home/vinicius/Projeto/Invent-rio/"
 cd $dir
 
 less sys_log

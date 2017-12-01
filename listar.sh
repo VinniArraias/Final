@@ -1,12 +1,12 @@
 #!/bin/bash
 clear
 
-#Listar as categoras existentes
+dir="/usr/share/Invent-rio"
 
 validacao(){
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
 
 if [[ -r $1 ]]
 	then
@@ -27,9 +27,7 @@ clear
 
 direc="$1"
 
-
-cd /home/vinicius/Projeto/Invent-rio/
-
+cd $dir
 
 OPCAO=$(dialog --stdout						\
 	--title 'LISTAR'					\
@@ -41,7 +39,7 @@ OPCAO=$(dialog --stdout						\
 
 if [[ $? == "1" ]]
                  then
-                        cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 
                         source op1.sh $1
 fi
@@ -51,7 +49,9 @@ fi
 if [[ $OPCAO == 1 ]]
 	then
 
-	cd /home/vinicius/Projeto/Invent-rio/registros/$direc/
+	#cd /home/vinicius/Projeto/Invent-rio/registros/$direc/
+	cd $dir/registros/$direc/
+
 	arquivo="$direc.csv"
 	
 	
@@ -72,7 +72,9 @@ if [[ $OPCAO == 1 ]]
 
 elif [[ $OPCAO == 2 ]]
 	then
-		cd /home/vinicius/Projeto/Invent-rio/registros/$direc/
+		#cd /home/vinicius/Projeto/Invent-rio/registros/$direc/
+		cd $dir/registros/$direc
+
 		chmod 777 *
 		arquivo="$direc.csv"
 		
@@ -98,7 +100,8 @@ OPCAO=$(dialog --stdout --title "CATEGORIAS" --menu "Escolha uma categoria:" 0 0
  
  if [[ $? == "1" ]]
                   then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        #cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
  
                         verificacao_opcao $direc $1
 fi
@@ -162,20 +165,20 @@ CATEGORIA=$1
 
 if [[ $CATEGORIA == 0 ]]
 	then
-		dir="/home/vinicius/Projeto/Invent-rio/"
+		#dir="/home/vinicius/Projeto/Invent-rio/"
 		cd $dir
 		source op1.sh
 	fi
 
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 validacao $CATEGORIA
 
-cd /home/vinicius/Projeto/Invent-rio/registros/$CATEGORIA/
+cd $dir/registros/$CATEGORIA/
 
 arquivo="$CATEGORIA.csv"
 
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 verificacao_opcao $CATEGORIA
 
@@ -183,8 +186,9 @@ verificacao_opcao $CATEGORIA
 
 #less $CATEGORIA.csv
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
+
 clear
 listar $1
 }

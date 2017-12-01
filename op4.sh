@@ -1,13 +1,12 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
+
 opcao(){
 
 clear
 
-#echo "1) Deletar localidade"
-#echo "2) Deletar item"
-#echo "3) Voltar"
-#read -p "Entre com uma opção: " OPCAO
 
 OPCAO=$(dialog	--stdout			\
 	--title 'Deletação'			\
@@ -20,7 +19,7 @@ OPCAO=$(dialog	--stdout			\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                         source menu.sh $1
 fi
@@ -45,7 +44,7 @@ fi
 			remover(){
 clear
  
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 #echo $2
  #read -p "Entre com o usuário a ser removido [0 para retornar]: " USUARIO
@@ -57,7 +56,7 @@ USUARIO=$(dialog --stdout                                                       
  
 if [[ $? == "1" ]]
                  then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
  
                          opcao $1
  fi
@@ -90,7 +89,7 @@ if [[ $? == "1" ]]
                         opcao $1
 
         fi
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 US=$(cat user_atual.sh)
 
@@ -113,7 +112,7 @@ grep "$USUARIO" users
                                  --msgbox "Este usuário ($USUARIO) não existe."  \
                                  0 0
  
-                         cd /home/vinicius/Projeto/Invent-rio/
+                         cd $dir
                          opcao $1
  
          fi
@@ -134,7 +133,7 @@ grep -Riv "$USUARIO" users > usersr2.csv
  
 cat usersr2.csv > users
  
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 opcao $1
 

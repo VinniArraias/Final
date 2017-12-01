@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 opcoes(){
 
 echo
@@ -14,14 +16,11 @@ dialog								\
 	--msgbox 'Pressione [enter] para voltar ao menu.'	\
 	0 0
 
-#echo "Opção inválida! Tente novamente."
-#read -p "Pressione [enter] para retornar ao menu." ENTER
-#clear
 
 }
 
 menu(){
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 OPCAO=$(dialog --stdout				\
 	--title 'MENU'				\
@@ -37,7 +36,7 @@ OPCAO=$(dialog --stdout				\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
  
                         source login.sh $1
 fi

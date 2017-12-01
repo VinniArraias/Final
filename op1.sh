@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
 opcao(){
 clear
 
@@ -16,7 +18,8 @@ OPCAO=$(dialog --stdout				\
 
 	if [[ $? == "1" ]]
         	         then
-	                        cd /home/vinicius/Projeto/Invent-rio/
+	                        #cd /home/vinicius/Projeto/Invent-rio/
+				cd $dir
 
         	                source menu.sh $1
 	fi
@@ -37,7 +40,7 @@ OPCAO=$(dialog --stdout				\
 
 	elif [[ $OPCAO == 3 ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/registros/$1/
+			cd $dir/registros/$1/
 			arquivo="baixas.csv"
 
 			dialog				\
@@ -45,7 +48,8 @@ OPCAO=$(dialog --stdout				\
 				--textbox $arquivo	\
 				0 0
 
-			cd /home/vinicius/Projeto/Invent-rio/
+			#cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 
 			opcao $1
 
@@ -53,7 +57,8 @@ OPCAO=$(dialog --stdout				\
 		then
 			listar(){
 
-				cd /home/vinicius/Projeto/Invent-rio/registros/
+				#cd /home/vinicius/Projeto/Invent-rio/registros/
+				cd $dir/registros/
  
 				le=$(less users)
 
@@ -62,7 +67,8 @@ OPCAO=$(dialog --stdout				\
         			--textbox users         \
          			0 0
 
-				cd /home/vinicius/Projeto/Invent-rio/
+				#cd /home/vinicius/Projeto/Invent-rio/
+				cd $dir
 
 				opcao $1
 }

@@ -1,9 +1,12 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
+
 deslogar(){
 
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 OPCAO=$(dialog --stdout				\
 	--title 'Sair'				\
@@ -16,7 +19,7 @@ OPCAO=$(dialog --stdout				\
 
 if [[ $? == "1" ]]
                 then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
 
                          source login.sh $1
 

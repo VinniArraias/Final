@@ -1,9 +1,11 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 verificacao(){
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
+cd $dir/registros/
 
 if [[ -r $1 ]]
 	then
@@ -22,8 +24,8 @@ if [[ -r $1 ]]
 
 
 del(){
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
-cd $dir
+
+cd $dir/registros/
 
 
 loc=$(for x in $(cat listagem) ; do
@@ -33,21 +35,18 @@ CATEGORIA=$(dialog --stdout --menu "Escolha uma localidade a se deletada:" 0 0 0
 
 if [[ $? == "1" ]]
                  then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
  
                         source op4.sh $1
 fi
 
-#cd /home/vinicius/Projeto/Invent-rio/
-#source menu.sh $OPCAO
-
 
 if [[ $OPCAO == 0 ]]
 	then
-		dir="/home/vinicius/Projeto/Invent-rio/"
+		#dir="/home/vinicius/Projeto/Invent-rio/"
 		cd $dir
 
-		source menu.sh $1
+		source op4.sh $1
 fi
 
 CATEGORIAA=$1
@@ -62,7 +61,8 @@ CATEGORIAA=$1
 			del $1
 
 	fi
-cd /home/vinicius/Projeto/Invent-rio/registros/
+
+cd $dir/registros/
 
 verificacao $CATEGORIA
 
@@ -83,7 +83,7 @@ dialog									\
 
 clear
 
-dir="/home/vinicius/Projeto/Invent-rio/"
+#dir="/home/vinicius/Projeto/Invent-rio/"
 cd $dir
 }
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dir="/usr/share/Invent-rio"
+
 validacao(){
 
 	if [[ $OPCAO == 1 ]]
@@ -52,7 +54,7 @@ validacao(){
 
 
 mais_opcoes(){
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 
 OPCAO=$(dialog --stdout						\
@@ -65,7 +67,7 @@ OPCAO=$(dialog --stdout						\
 
 if [[ $? == "1" ]]
                  then
-                        cd /home/vinicius/Projeto/Invent-rio/
+                        cd $dir
  
                         source menu.sh $1
 fi

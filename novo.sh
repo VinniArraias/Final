@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 
+dir="/usr/share/Invent-rio"
+
 
 verificacao_categoria1(){
 
@@ -29,7 +31,7 @@ CATEGORIA=$(dialog --stdout											\
 
 		if [[ $? == "1" ]]
                 	then
-                        	cd /home/vinicius/Projeto/Invent-rio/
+                        	cd $dir
 
                         	source op2.sh $1
 fi
@@ -45,7 +47,7 @@ fi
 
 	if [[ $CATEGORIA == 0 ]]
 		then
-			cd /home/vinicius/Projeto/Invent-rio/
+			cd $dir
 			source menu.sh $1
 fi
 
@@ -65,9 +67,9 @@ fi
 verificacao_categoria1 $CATEGORIA $1
 
 
-dir="/home/vinicius/Projeto/Invent-rio/registros/"
+#dir="/home/vinicius/Projeto/Invent-rio/registros/"
 
-cd $dir 
+cd $dir/registros/
 
 mkdir $CATEGORIA
 
@@ -82,7 +84,7 @@ if [[ $? == 1 ]]
 	fi
 
 
-cd /home/vinicius/Projeto/Invent-rio/registros/$CATEGORIA/
+cd $dir/registros/$CATEGORIA/
 
 touch catg.csv
 chmod 777 catg.csv
@@ -93,11 +95,11 @@ touch baixas.csv
 
 chmod 777 *
 
-cd /home/vinicius/Projeto/Invent-rio/registros/
+cd $dir/registros/
 
 echo $CATEGORIA >> listagem
 
-cd /home/vinicius/Projeto/Invent-rio/
+cd $dir
 
 
 dialog 								\
