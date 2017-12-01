@@ -58,7 +58,7 @@ cd $dir
 
 
 OPCAO=$(dialog --stdout						\
-	--title 'Mais opções'					\
+	--title 'MAIS OPÇÕES'					\
 	--menu 'Escolha uma opção: '				\
 	0 0 0							\
 	"1" 'Listar log'					\

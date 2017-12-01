@@ -22,7 +22,7 @@ correct(){
 
 cd $dir/registros/
 
-loc=$(for x in $(cat listagem.sh) ; do
+loc=$(for x in $(cat listagem) ; do
          echo $x ' -'
         done)
 OPCAO=$(dialog --stdout --title "LOCALIDADE" --menu "Escolha uma localidade:" 0 0 0 $loc)
